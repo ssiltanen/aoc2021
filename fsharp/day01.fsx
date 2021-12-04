@@ -4,17 +4,10 @@ let input =
     System.IO.File.ReadAllLines "data/day01.txt"
     |> Array.map int
 
-let countIncreasingValues =
-    Array.pairwise
-    >> Array.where (fun (a, b) -> b > a)
-    >> Array.length
+let length = Array.length input
 
-input
-|> countIncreasingValues
-|> printfn "Day1-1 %i"
-
-input
-|> Array.windowed 3
-|> Array.map Array.sum
-|> countIncreasingValues
-|> printfn "Day1-2 %i"
+[ 1; 3 ]
+|> List.iteri (fun i window -> 
+    Array.zip input[..length - window - 1] input[window..]
+    |> Array.sumBy (fun (x,y) -> System.Convert.ToInt32(x<y))
+    |> printfn "Day1-%i %i" (i+1))

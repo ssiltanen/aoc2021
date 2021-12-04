@@ -14,7 +14,7 @@ input
 |> Array.fold
     (fun (x, y) cmd ->
         match cmd with
-        | Up value -> x, System.Math.Max(y - value, 0)
+        | Up value -> x, max (y - value) 0
         | Down value -> x, y + value
         | Forward value -> x + value, y)
     (0, 0)
@@ -25,7 +25,7 @@ input
 |> Array.fold
     (fun (x, y, aim) cmd ->
         match cmd with
-        | Up value -> x, y, System.Math.Max(aim - value, 0)
+        | Up value -> x, y, max (aim - value) 0
         | Down value -> x, y, aim + value
         | Forward value -> x + value, y + aim * value, aim)
     (0, 0, 0)
